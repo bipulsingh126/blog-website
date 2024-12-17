@@ -1,6 +1,6 @@
-import { assets } from "../Assets/assets";
-import Image from "next/image";
-import React from "react";
+import { assets } from '../Assets/assets'
+import Image from 'next/image'
+import React from 'react'
 
 const Header = () => {
   return (
@@ -9,6 +9,7 @@ const Header = () => {
         <Image
           src={assets.logo}
           width={180}
+          height={50}
           alt="logo"
           className="w-[130px] sm:w-auto"
         />
@@ -18,10 +19,20 @@ const Header = () => {
       </div>
       <div className="text-center my-8 ">
         <h1 className="text-3xl sm:text-5xl font-medium"> Latest Blogs</h1>
-        <p className="mt-10 max-w-[740px] m-auto text-xs sm:text-base ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat aliquid dicta eveniet blanditiis voluptates quam, quidem reiciendis aspernatur praesentium atque, suscipit explicabo esse, optio architecto veniam non a. Asperiores, odit!</p>
+        <p className="mt-10 max-w-[740px] m-auto text-xs sm:text-base ">
+          Our goal is to provide readers with useful information and inspiration
+          for their everyday lives. Whether you're looking for the latest tech
+          reviews, practical lifestyle tips, exciting travel stories, or
+          delicious recipes, you'll find it all here.
+        </p>
+
+        <form className='flex justify-between max-w-[500px] scale-75 sm:scale-100 mx-auto mt-10 border border-black shadow-[-7px_7px_0px_#000000]'>
+          <input type="email" placeholder='Enter your email' className='pl-4 outline-none w-full' />
+          <button type='submit' className='py-4 px-4 sm:px-8 active:bg-gray-600 active:text-white border-l border-black'>Subscribe </button>
+        </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
