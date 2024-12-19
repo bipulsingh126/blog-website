@@ -1,110 +1,191 @@
-# Blog Website Frontend Documentation
+# Blog Website Documentation
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+A modern blog platform built with Next.js 14, featuring server components, app router, and Tailwind CSS.
+
+## Tech Stack
+
+- **Framework:** Next.js 14
+- **Styling:** Tailwind CSS
+- **Database:** MongoDB
+- **Authentication:** NextAuth.js
+- **State Management:** React Context
+- **Form Handling:** React Hook Form
+- **Validation:** Zod
+- **Markdown:** MDX
 
 ## Project Structure
 
 ```
 blog-website/
 ├── app/
+│   ├── (auth)/
+│   │   ├── login/         # Login page
+│   │   └── register/      # Register page
 │   ├── blogs/
-│   │   └── [id]/           # Dynamic blog post pages
-│   └── page.js             # Home page
+│   │   ├── [id]/         # Individual blog view
+│   │   ├── create/       # Create new blog
+│   │   └── edit/[id]/    # Edit blog
+│   ├── api/              # API routes
+│   └── page.tsx          # Home page
 ├── components/
-│   ├── Footer.jsx          # Footer component
-│   └── ...                 # Other components
-└── Assets/
-    └── assets.js           # Central asset management
+│   ├── auth/            # Authentication components
+│   ├── blog/            # Blog-related components
+│   ├── shared/          # Reusable components
+│   └── ui/              # UI components
+├── lib/
+│   ├── actions/         # Server actions
+│   ├── hooks/           # Custom hooks
+│   ├── utils/           # Utility functions
+│   └── validations/     # Schema validations
+├── public/              # Static assets
+└── styles/             # Global styles
 ```
 
 ## Key Features
 
-- **Dynamic Blog Posts**: Individual blog pages with unique URLs using Next.js dynamic routing
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Image Optimization**: Using Next.js Image component for optimal loading
-- **Component-Based Architecture**: Reusable React components
+- **Authentication & Authorization**
+  - Email & Password login
+  - Social login (Google, GitHub)
+  - Protected routes
+  - Role-based access
 
-## Components Overview
+- **Blog Management**
+  - Create, edit, delete posts
+  - Rich text editor with MDX
+  - Image upload with optimization
+  - Categories and tags
 
-### Blog Post Page (`blogs/[id]/page.jsx`)
-- Dynamic routing for individual blog posts
-- Displays full article content with:
-  - Header with logo and CTA button
-  - Author information
-  - Featured image
-  - Article content with structured sections
-  - Social sharing options
-  - Footer
-
-### Asset Management
-All assets (images, icons, blog data) are centrally managed in `Assets/assets.js`:
-- Blog data structure includes:
-  - ID
-  - Title
-  - Author details
-  - Images
-  - Content
-
-## Styling
-
-The project uses Tailwind CSS for styling with:
-- Responsive breakpoints (sm, md, lg)
-- Custom shadows and borders
-- Flexible layouts using Flexbox
-- Consistent spacing using Tailwind's spacing scale
+- **User Experience**
+  - Responsive design
+  - Dark/Light mode
+  - Infinite scroll
+  - Search functionality
+  - Comment system
 
 ## Getting Started
 
-1. Install dependencies:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/blog-website.git
+```
+
+2. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
-2. Run the development server:
+3. Set up environment variables:
+```env
+# .env.local
+DATABASE_URL=
+NEXTAUTH_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+CLOUDINARY_URL=
+```
+
+4. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | MongoDB connection string |
+| `NEXTAUTH_SECRET` | NextAuth.js secret key |
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
+| `CLOUDINARY_URL` | Cloudinary upload URL |
+
+## API Routes
+
+### Blog Endpoints
+```typescript
+GET    /api/blogs          // Get all blogs
+GET    /api/blogs/:id      // Get single blog
+POST   /api/blogs          // Create blog
+PUT    /api/blogs/:id      // Update blog
+DELETE /api/blogs/:id      // Delete blog
+```
+
+### User Endpoints
+```typescript
+POST   /api/auth/register  // Register new user
+POST   /api/auth/login     // Login user
+GET    /api/user/profile   // Get user profile
+PUT    /api/user/profile   // Update profile
+```
 
 ## Development Guidelines
 
-### Adding New Blog Posts
-1. Add new blog data to `Assets/assets.js`:
-```javascript
-export const blog_data = [
-  {
-    id: 1,
-    title: "Your Blog Title",
-    author: "Author Name",
-    author_img: "/path/to/author/image",
-    image: "/path/to/featured/image",
-    description: "Blog content..."
-  }
-  // ...
-]
+### Code Style
+- Use TypeScript for type safety
+- Follow ESLint configuration
+- Use server components by default
+- Implement error boundaries
+- Write unit tests for critical functions
+
+### Component Creation
+```typescript
+// Example component structure
+import { FC } from 'react'
+
+interface ComponentProps {
+  // Props interface
+}
+
+const Component: FC<ComponentProps> = ({ }) => {
+  return (
+    // JSX
+  )
+}
+
+export default Component
 ```
 
-### Creating New Components
-1. Create component in `/components` directory
-2. Use Tailwind CSS for styling
-3. Follow existing component patterns for consistency
+### Data Fetching
+```typescript
+// Example server action
+'use server'
+
+export async function fetchBlogs() {
+  try {
+    // Fetch logic
+  } catch (error) {
+    // Error handling
+  }
+}
+```
 
 ## Deployment
 
-Deploy using [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme):
+1. Push to GitHub
+2. Deploy on Vercel:
+   - Connect GitHub repository
+   - Configure environment variables
+   - Deploy
 
-1. Push your code to GitHub
-2. Import project to Vercel
-3. Configure build settings if needed
-4. Deploy
+## Performance Optimization
+
+- Image optimization with next/image
+- Static page generation where possible
+- Dynamic imports for heavy components
+- API route caching
+- Database query optimization
+
+## Contributing
+
+1. Fork the repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Open pull request
 
 ## Learn More
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Next.js Image Component](https://nextjs.org/docs/app/building-your-application/optimizing/images)
+- [Next.js 14 Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [NextAuth.js](https://next-auth.js.org)
+- [MongoDB](https://www.mongodb.com/docs)
