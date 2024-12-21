@@ -1,70 +1,82 @@
-import { blog_data } from '@/Assets/assets'
-import React, { useState } from 'react'
-import BlogItem from './BlogItem'
+import { blog_data } from "@/Assets/assets";
+import React, { useEffect, useState } from "react";
+import BlogItem from "./BlogItem";
+import axios from "axios";
 
 const BlogList = () => {
-  const [menu, setMenu] = useState('All')
+  const [menu, setMenu] = useState("All");
+  const [blogs, setBlogs] = useState([]);
+
+  const fetchBlogs = async () => {
+    const res = await axios.get("/api/blog");
+    setBlogs(res.data.blogs);
+
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
 
   return (
     <div>
       <div className="flex justify-center gap-6 my-10">
         <button
-          onClick={() => setMenu('All')}
+          onClick={() => setMenu("All")}
           className={
-            menu === 'All' ? `bg-black text-white py-1 px-4 rounded-sm ` : ''
+            menu === "All" ? `bg-black text-white py-1 px-4 rounded-sm ` : ""
           }
         >
           All
         </button>
         <button
           className={
-            menu === 'Technology'
+            menu === "Technology"
               ? `bg-black text-white py-1 px-4 rounded-sm `
-              : ''
+              : ""
           }
-          onClick={() => setMenu('Technology')}
+          onClick={() => setMenu("Technology")}
         >
           Technology
         </button>
         <button
           className={
-            menu === 'Startup'
+            menu === "Startup"
               ? `bg-black text-white py-1 px-4 rounded-sm `
-              : ''
+              : ""
           }
-          onClick={() => setMenu('Startup')}
+          onClick={() => setMenu("Startup")}
         >
           Startup
         </button>
         <button
           className={
-            menu === 'Lifestyle'
+            menu === "Lifestyle"
               ? `bg-black text-white py-1 px-4 rounded-sm `
-              : ''
+              : ""
           }
-          onClick={() => setMenu('Lifestyle')}
+          onClick={() => setMenu("Lifestyle")}
         >
           Lifestyle
         </button>
       </div>
       <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24">
-        {blog_data
-          .filter((item) => (menu == 'All' ? true : item.category === menu))
+        {blogs
+          .filter((item) => (menu == "All" ? true : item.category === menu))
           .map((items, index) => {
             return (
               <BlogItem
-                id={items.id}
+                id={items._id}
                 key={index}
                 image={items.image}
                 title={items.title}
                 description={items.description}
                 category={items.category}
               />
-            )
+            );
           })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BlogList
+export default BlogList;

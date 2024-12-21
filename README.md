@@ -189,3 +189,149 @@ export async function fetchBlogs() {
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [NextAuth.js](https://next-auth.js.org)
 - [MongoDB](https://www.mongodb.com/docs)
+
+## Component Documentation
+
+### BlogList Component
+```typescript
+// components/BlogList.jsx
+- Main component for displaying blog posts
+- Features category filtering (All, Technology, Startup, Lifestyle)
+- Fetches blogs from API on component mount
+- Responsive grid layout for blog items
+```
+
+### Admin Components
+
+#### Sidebar Component
+```typescript
+// components/AdminComponents/Sidebar.jsx
+- Admin navigation sidebar
+- Links to:
+  - Add Blogs (/admin/addProduct)
+  - Blogs List (/admin/blogList)
+  - Subscriptions (/admin/subscriptions)
+- Responsive design with collapsible layout
+```
+
+### API Routes
+
+#### Blog API
+```typescript
+// app/api/blog/route.js
+GET /api/blog
+- Fetches all blogs or single blog by ID
+- Query params: ?id={blogId} for single blog
+
+POST /api/blog
+- Creates new blog post
+- Handles image upload with timestamp-based naming
+- Accepts form data with:
+  - title
+  - description
+  - category
+  - image
+  - author
+  - authorImg
+```
+
+### Pages
+
+#### Blog Detail Page
+```typescript
+// app/blogs/[id]/page.jsx
+- Dynamic route for individual blog posts
+- Fetches blog data based on URL parameter
+- Displays:
+  - Blog header with author info
+  - Featured image
+  - Full blog content
+  - Social sharing options
+```
+
+#### Admin Pages
+
+##### Add Product Page
+```typescript
+// app/admin/addProduct/page.jsx
+- Form for creating new blog posts
+- Features:
+  - Image upload with preview
+  - Title and description inputs
+  - Category selection
+  - Author attribution
+  - Success/error notifications
+```
+
+##### Blog List Page
+```typescript
+// app/admin/blogList/page.jsx
+- Admin interface for managing blogs
+- (Currently in development)
+```
+
+##### Admin Layout
+```typescript
+// app/admin/layout.jsx
+- Wrapper layout for admin section
+- Includes:
+  - Sidebar navigation
+  - Header with admin info
+  - Toast notifications
+```
+
+## Project Structure Updates
+
+```
+blog-website/
+├── app/
+│   ├── admin/
+│   │   ├── addProduct/    # Blog creation
+│   │   ├── blogList/      # Blog management
+│   │   └── layout.jsx     # Admin layout wrapper
+│   ├── blogs/
+│   │   └── [id]/         # Individual blog view
+│   └── api/
+│       └── blog/         # Blog API endpoints
+├── components/
+│   ├── AdminComponents/
+│   │   └── Sidebar.jsx   # Admin navigation
+│   └── BlogList.jsx      # Blog listing component
+```
+
+## API Documentation Updates
+
+### Blog Endpoints
+```typescript
+GET    /api/blog          // Get all blogs
+GET    /api/blog?id=:id   // Get single blog
+POST   /api/blog          // Create blog with image upload
+```
+
+## Development Guidelines
+
+### Component Structure
+```typescript
+// Example blog component structure
+const BlogComponent = () => {
+  const [data, setData] = useState(null)
+  
+  useEffect(() => {
+    // Fetch data
+  }, [])
+
+  return (
+    // JSX with Tailwind styling
+  )
+}
+```
+
+### Image Handling
+```typescript
+// Image upload handling
+const formData = new FormData()
+formData.append('image', imageFile)
+// Store with timestamp-based naming
+const timestamp = Date.now()
+const path = `./public/${timestamp}_${image.name}`
+```

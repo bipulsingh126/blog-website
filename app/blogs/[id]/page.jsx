@@ -1,32 +1,29 @@
-'use client'
-import { assets, blog_data } from '@/Assets/assets'
-import Footer from '@/components/Footer'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+"use client";
+import { assets, blog_data } from "@/Assets/assets";
+import Footer from "@/components/Footer";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 const page = ({ params }) => {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
 
-  const fetchBlogData = () => {
-    for (let i = 0; i < blog_data.length; i++) {
-      if (Number(params.id) === blog_data[i].id) {
-        setData(blog_data[i])
-        break
-      }
-    }
-  }
+  const fetchBlogData = async () => {
+    const res = await axios.get("/api/blog", { params: { id: params.id } });
+    setData(res.data);
+  };
 
   useEffect(() => {
-    fetchBlogData()
-  }, [])
+    fetchBlogData();
+  }, []);
 
   return data ? (
     <>
       <div className="bg-gray-200 py-5 px-5 md:px-12 lg:px-28">
         <div className="flex justify-between items-center">
-          <Link href='/'>
-            {' '}
+          <Link href="/">
+            {" "}
             <Image
               src={assets.logo}
               width={180}
@@ -52,13 +49,14 @@ const page = ({ params }) => {
           </h1>
           <Image
             className="mx-auto mt-6 border border-white rounded-full "
-            src={data.author_img}
+            src={assets.profile_icon}
             width={60}
             height={60}
-            alt="auther"
+            alt="author"
+            priority
           />
           <p className="mt-1 pb-2 text-lg max-w-[740px] mx-auto">
-            {data.author}{' '}
+            {data.author}{" "}
           </p>
         </div>
       </div>
@@ -73,7 +71,7 @@ const page = ({ params }) => {
         <h1 className="my-8 text-2xl font-semibold">Introduction:</h1>
         <p>{data.description} </p>
         <h3 className="my-5 text-[18px] font-semibold ">
-          Step 1 : self-Reflection and Goal Setting{' '}
+          Step 1 : self-Reflection and Goal Setting{" "}
         </h3>
         <p className="my-3">
           Begin your journey by taking time for honest self-reflection. Consider
@@ -88,7 +86,7 @@ const page = ({ params }) => {
           foundation of successful lifestyle management.
         </p>
         <h3 className="my-5 text-[18px] font-semibold ">
-          Step 2 : Time Management and Prioritization{' '}
+          Step 2 : Time Management and Prioritization{" "}
         </h3>
         <p className="my-3">
           Master the art of time management by implementing effective scheduling
@@ -103,7 +101,7 @@ const page = ({ params }) => {
           to your personal growth.
         </p>
         <h3 className="my-5 text-[18px] font-semibold ">
-          Step 3 : Maintaining Balance and Wellness{' '}
+          Step 3 : Maintaining Balance and Wellness{" "}
         </h3>
         <p className="my-3">
           Strike a healthy balance between work, personal life, and self-care.
@@ -128,7 +126,7 @@ const page = ({ params }) => {
         </p>
         <div className="my-24">
           <p className="text-black font font-semibold my-4">
-            Share this article on social media{' '}
+            Share this article on social media{" "}
           </p>
           <div className="flex">
             <Image src={assets.facebook_icon} alt="facebook" width={50} />
@@ -141,7 +139,7 @@ const page = ({ params }) => {
     </>
   ) : (
     <></>
-  )
-}
+  );
+};
 
-export default page
+export default page;
