@@ -44,3 +44,32 @@ export async function POST(request) {
     );
   }
 }
+
+export async function GET(request) {
+  try {
+    const emails = await EmailModel.find({});
+    return NextResponse.json(emails);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    const id = request.nextUrl.searchParams.get("id");
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Email ID is required" },
+        { status: 400 }
+      );
+    }
+    await EmailModel.findByIdAndDelete(id);
+    return NextResponse.json({ success: true, message: "Email Deleted" });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { success: false, message: "Failed to delete email" },
+      { status: 500 }
+    );
+  }
+}

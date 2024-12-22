@@ -68,62 +68,12 @@ const page = ({ params }) => {
           height={780}
           alt="image"
         />
-        <h1 className="my-8 text-2xl font-semibold">Introduction:</h1>
-        <p>{data.description} </p>
-        <h3 className="my-5 text-[18px] font-semibold ">
-          Step 1 : self-Reflection and Goal Setting{" "}
-        </h3>
-        <p className="my-3">
-          Begin your journey by taking time for honest self-reflection. Consider
-          what truly matters to you and what you want to achieve in life. Set
-          SMART goals - Specific, Measurable, Achievable, Relevant, and
-          Time-bound objectives that align with your personal values.
-        </p>
-        <p className="my-3">
-          Create a vision board or journal to document your aspirations. This
-          visual representation will help maintain focus and motivation
-          throughout your journey. Remember, effective goal setting is the
-          foundation of successful lifestyle management.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold ">
-          Step 2 : Time Management and Prioritization{" "}
-        </h3>
-        <p className="my-3">
-          Master the art of time management by implementing effective scheduling
-          techniques. Use tools like digital calendars or planners to organize
-          your daily activities. Break down larger goals into smaller,
-          manageable tasks and prioritize them based on importance and urgency.
-        </p>
-        <p className="my-3">
-          Learn to say no to activities that don't align with your goals.
-          Remember that time is your most valuable resource - invest it wisely
-          in activities that bring you closer to your objectives and contribute
-          to your personal growth.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold ">
-          Step 3 : Maintaining Balance and Wellness{" "}
-        </h3>
-        <p className="my-3">
-          Strike a healthy balance between work, personal life, and self-care.
-          Incorporate regular exercise, proper nutrition, and adequate rest into
-          your routine. Remember that physical health directly impacts mental
-          clarity and emotional well-being.
-        </p>
-        <p className="my-3">
-          Practice mindfulness and stress management techniques to maintain
-          emotional equilibrium. Build meaningful relationships and nurture your
-          support system, as social connections play a crucial role in overall
-          life satisfaction.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold ">Conclusion </h3>
-        <p className="my-3">
-          Successfully managing your lifestyle is an ongoing journey that
-          requires dedication, flexibility, and continuous adjustment. By
-          following these steps and remaining committed to your goals, you can
-          create a fulfilling and balanced life that aligns with your values and
-          aspirations. Remember that progress takes time, and small consistent
-          actions lead to significant long-term changes.
-        </p>
+
+        <div
+          className=" blog-content "
+          dangerouslySetInnerHTML={{ __html: data.description }}
+        ></div>
+
         <div className="my-24">
           <p className="text-black font font-semibold my-4">
             Share this article on social media{" "}
