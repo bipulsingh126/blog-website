@@ -13,7 +13,7 @@ const Page = () => {
     description: "",
     category: "Startup",
     author: "Ronny Singh",
-    authorImg: assets.profile_icon,
+    authorImg: "/profile_icon.png",
   });
 
   const onChangeHandler = (e) => {
@@ -44,7 +44,7 @@ const Page = () => {
         description: "",
         category: "Startup",
         author: "Ronny Singh",
-        authorImg: assets.profile_icon,
+        authorImg: "/profile_icon.png",
       });
     }else{
       toast.error("error")

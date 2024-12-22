@@ -2,6 +2,7 @@ import { ConnectDB } from "@/lib/config/db";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import BlogModel from "@/lib/models/blog.model";
+import fs from "fs";
 
 const LoadDb = async () => {
   await ConnectDB();
@@ -42,4 +43,38 @@ export async function POST(request) {
   console.log("Blog Saved");
 
   return NextResponse.json({ success: true, message: "Blog Add" });
+}
+
+//creating api endipoint delete blog
+export async function DELETE(request) {
+  try {
+    const blogId = request.nextUrl.searchParams.get("id");
+    const blog = await BlogModel.findById(blogId);
+
+    if (!blog) {
+      return NextResponse.json(
+        { success: false, message: "Blog not found" },
+        { status: 404 }
+      );
+    }
+
+    if (blog.image) {
+      const imagePath = `./public${blog.image}`;
+      try {
+        fs.unlinkSync(imagePath);
+      } catch (error) {
+        console.error("Error deleting image:", error);
+      }
+    }
+
+    await BlogModel.findByIdAndDelete(blogId);
+
+    return NextResponse.json({ success: true, message: "Blog Deleted" });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return NextResponse.json(
+      { success: false, message: "Error deleting blog" },
+      { status: 500 }
+    );
+  }
 }

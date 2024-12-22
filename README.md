@@ -335,3 +335,109 @@ formData.append('image', imageFile)
 const timestamp = Date.now()
 const path = `./public/${timestamp}_${image.name}`
 ```
+
+## Component Documentation
+
+### BlogList Page (`app/admin/blogList/page.jsx`)
+- Admin interface for blog management
+- Features:
+  - List view of all blogs
+  - Author information
+  - Publication dates
+  - Delete functionality
+  - Responsive table layout
+
+### Add Blog Page (`app/admin/addProduct/page.jsx`)
+- Blog creation interface
+- Features:
+  - Image upload with preview
+  - Title and description fields
+  - Category selection
+  - Author attribution
+  - Form validation
+
+### Blog API (`app/api/blog/route.js`)
+- Handles all blog-related operations
+- Features:
+  - Image storage with timestamp-based naming
+  - MongoDB integration
+  - Error handling
+  - Success/failure responses
+
+### Newsletter System (`app/api/email/route.js`)
+- Manages email subscriptions
+- Features:
+  - Duplicate email prevention
+  - Validation
+  - Error handling
+  - Success notifications
+
+## Setup Instructions
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Set up MongoDB connection:
+- Create MongoDB database
+- Update connection string in environment variables
+
+3. Run development server:
+```bash
+npm run dev
+```
+
+## Environment Variables
+
+Create a `.env.local` file with:
+```env
+MONGODB_URI=your_mongodb_connection_string
+```
+
+## Styling
+
+The project uses Tailwind CSS with custom utilities:
+```css
+/* Custom scrollbar hiding */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+```
+
+## Image Configuration
+
+Next.js image configuration allows for:
+- Local image processing
+- Remote image optimization
+- Multiple domain support
+
+## Error Handling
+
+The application implements comprehensive error handling:
+- Form validation errors
+- API response errors
+- Image upload errors
+- Database operation errors
+
+## Future Enhancements
+
+- User authentication
+- Rich text editor
+- Image optimization
+- Comment system
+- Search functionality
+- Pagination
+- Categories management
+
+## Contributing
+
+1. Fork the repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Open pull request
+
+## License
+
+MIT License
